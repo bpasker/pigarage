@@ -3,11 +3,17 @@ import datetime
 import RPi.GPIO as GPIO
 app = Flask(__name__)
 
+#Get all my config files
+app.config.from_object('pigarage.default_settings')
+app.config.from_envvar('PIGARAGE_SETTINGS')
+
+#Setup system for SSL
 from OpenSSL import SSL
 context = SSL.Context(SSL.SSLv23_METHOD)
-context.use_privatekey_file('yourserver.key')
-context.use_certificate_file('yourserver.crt')
+context.use_privatekey_file(app.config['SSL_KEY'])
+context.use_certificate_file(app.config['SSL_CRT'])
 
+#Setup GPIO for PI
 GPIO.setmode(GPIO.BCM)
 
 @app.route("/")
