@@ -7,11 +7,7 @@ app = Flask(__name__)
 app.config.from_object(__name__) # load config from this file 
 app.config.from_envvar('PIGARAGE_SETTINGS')
 
-#Setup system for SSL
-from OpenSSL import SSL
-context = SSL.Context(SSL.SSLv23_METHOD)
-context.use_privatekey_file(app.config['SSL_KEY'])
-context.use_certificate_file(app.config['SSL_CRT'])
+context = (app.config['SSL_CRT'], app.config['SSL_KEY'])
 
 #Setup GPIO for PI
 GPIO.setmode(GPIO.BCM)
