@@ -4,7 +4,7 @@ import RPi.GPIO as GPIO
 app = Flask(__name__)
 
 #Get all my config files
-app.config.from_object('yourapplication.default_settings')
+app.config.from_object(__name__) # load config from this file 
 app.config.from_envvar('PIGARAGE_SETTINGS')
 
 #Setup system for SSL
