@@ -3,6 +3,11 @@ import datetime
 import RPi.GPIO as GPIO
 app = Flask(__name__)
 
+from OpenSSL import SSL
+context = SSL.Context(SSL.SSLv23_METHOD)
+context.use_privatekey_file('yourserver.key')
+context.use_certificate_file('yourserver.crt')
+
 GPIO.setmode(GPIO.BCM)
 
 @app.route("/")
@@ -35,4 +40,4 @@ def readPin(pin):
 
 
 if __name__ == "__main__":
-   app.run(host='0.0.0.0', port=80, debug=True)
+   app.run(host='0.0.0.0', port=443, debug=True, ssl_context=context)
