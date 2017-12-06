@@ -59,11 +59,11 @@ def readPinJSON(pin):
    return jsonify(response)
 
 #Trigger garage change
-@app.route("/triggerPinJSON/<pin>/<pin2>")
+@app.route("/triggerPinJSON/<int:pin>/<int:pin2>")
 def triggerPinJSON(pin,pin2):
    try:
-      GPIO.setup(int(pin), GPIO.OUT)
-      GPIO.setup(int(pin2), GPIO.IN)
+      GPIO.setup(pin, GPIO.OUT)
+      GPIO.setup(pin2, GPIO.IN)
 
       if GPIO.input(int(pin2)) == True:
          GPIO.output(int(pin), GPIO.HIGH)
