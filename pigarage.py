@@ -46,7 +46,7 @@ def readPin(pin):
    return render_template('pin.html', **templateData)
 
 #Return pin status in JSON
-@app.route("/readPinJSON/<pin>")
+@app.route("/api/readPin/<pin>")
 @auth.login_required
 def readPinJSON(pin):
    try:
@@ -72,7 +72,7 @@ def readPinJSON(pin):
 #Trigger garage change
 #Pin 1 is for the relay
 #Pin 2 is for the reed switch
-@app.route("/triggerPinJSON/<int:pin>/<int:pin2>")
+@app.route("/api/triggerPin/<int:pin>/<int:pin2>")
 @auth.login_required
 def triggerPinJSON(pin,pin2):
    try:
