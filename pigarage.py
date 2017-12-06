@@ -59,6 +59,8 @@ def readPinJSON(pin):
    return jsonify(response)
 
 #Trigger garage change
+#Pin 1 is for the relay
+#Pin 2 is for the reed switch
 @app.route("/triggerPinJSON/<int:pin>/<int:pin2>")
 def triggerPinJSON(pin,pin2):
    try:
