@@ -60,7 +60,7 @@ def readPinJSON(pin):
 
 #Trigger garage change
 @app.route("/triggerPinJSON/<pin>/<pin2>")
-def triggerPinJSON(pin):
+def triggerPinJSON(pin,pin2):
    try:
       GPIO.setup(int(pin), GPIO.OUT)
       GPIO.setup(int(pin2), GPIO.IN)
