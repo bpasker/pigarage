@@ -63,9 +63,10 @@ def readPinJSON(pin):
 def triggerPinJSON(pin):
    try:
       GPIO.setup(int(pin), GPIO.OUT)
-      #GPIO.output(pin, GPIO.HIGH)
+
+      GPIO.output(int(pin), GPIO.HIGH)
       sleep(.5)
-      #GPIO.output(pin, GPIO.LOW)
+      GPIO.output(int(pin), GPIO.LOW)
       response = {
          'status': '200'
       }
