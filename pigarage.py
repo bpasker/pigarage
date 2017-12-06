@@ -3,6 +3,8 @@ import datetime
 from time import sleep
 import RPi.GPIO as GPIO
 from flask import jsonify
+from flask_sqlalchemy import SQLAlchemy
+from passlib.apps import custom_app_context as pwd_context
 app = Flask(__name__)
 
 #Get all my config files
@@ -12,6 +14,9 @@ app.config.from_envvar('PIGARAGE_SETTINGS')
 
 #Load context for SSL cert and key
 context = (app.config['SSL_CRT'], app.config['SSL_KEY'])
+
+#Setup DB for users
+db = SQLAlchemy(pigarage)
 
 #Setup GPIO for PI
 GPIO.setmode(GPIO.BCM)
@@ -92,6 +97,33 @@ def triggerPinJSON(pin,pin2):
          }
          
    return jsonify(response)
+
+#User Management
+@app.route('/api/users', methods = ['POST'])
+def new_user():
+    username = request.json.get('username')
+    password = request.json.get('password')
+    if username is None or password is None:
+        abort(400) # missing arguments
+    if User.query.filter_by(username = username).first() is not None:
+        abort(400) # existing user
+    user = User(username = username)
+    user.hash_password(password)
+    db.session.add(user)
+    db.session.commit()
+    return jsonify({ 'username': user.username }), 201, {'Location': url_for('get_user', id = user.id, _external = True)}
+
+class User(db.Model):
+    __tablename__ = 'users'
+    id = db.Column(db.Integer, primary_key = True)
+    username = db.Column(db.String(32), index = True)
+    password_hash = db.Column(db.String(128))''
+
+   def hash_password(self, password):
+        self.password_hash = pwd_context.encrypt(password)
+
+   def verify_password(self, password):
+        return pwd_context.verify(password, self.password_hash)
 
 if __name__ == "__main__":
    app.run(host='0.0.0.0', port=443, debug=True, ssl_context=context)
