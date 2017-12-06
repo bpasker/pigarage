@@ -1,5 +1,6 @@
 from flask import Flask, render_template
 import datetime
+from time import sleep
 import RPi.GPIO as GPIO
 from flask import jsonify
 app = Flask(__name__)
@@ -34,6 +35,7 @@ def readPin(pin):
 
    return render_template('pin.html', **templateData)
 
+#Return pin status in JSON
 @app.route("/readPinJSON/<pin>")
 def readPinJSON(pin):
    try:
@@ -54,9 +56,26 @@ def readPinJSON(pin):
                      'status': 'error'
          }
 
-
    return jsonify(response)
 
+#Trigger garage change
+@app.route("/triggerGarage/<pin>")
+def triggerPinJSON(pin):
+   try:
+      GPIO.setup(int(pin), GPIO.OUT)
+      GPIO.output(pin, GPIO.HIGH)
+      sleep(.5)
+      GPIO.output(pin, GPIO.LOW)
+      response = {
+         'status': '200'
+      }
+   except:
+      response = {
+                     'pin': pin,
+                     'status': 'error'
+         }
+         
+   return jsonify(response)
 
 if __name__ == "__main__":
    app.run(host='0.0.0.0', port=443, debug=True, ssl_context=context)
