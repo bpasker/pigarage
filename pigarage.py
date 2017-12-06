@@ -79,6 +79,10 @@ def triggerPinJSON(pin):
          response = {
             'status': 'Closing'
          }
+      else
+         response = {
+            'status': 'Failed to get pin2 state'
+         }
    except:
       response = {
                      'pin': pin,
