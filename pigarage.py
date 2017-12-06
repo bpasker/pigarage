@@ -27,6 +27,7 @@ GPIO.setmode(GPIO.BCM)
 
 #Get status of a pin on the PI
 @app.route("/readPin/<pin>")
+@auth.login_required
 def readPin(pin):
    try:
       GPIO.setup(int(pin), GPIO.IN)
@@ -46,6 +47,7 @@ def readPin(pin):
 
 #Return pin status in JSON
 @app.route("/readPinJSON/<pin>")
+@auth.login_required
 def readPinJSON(pin):
    try:
       GPIO.setup(int(pin), GPIO.IN)
@@ -71,6 +73,7 @@ def readPinJSON(pin):
 #Pin 1 is for the relay
 #Pin 2 is for the reed switch
 @app.route("/triggerPinJSON/<int:pin>/<int:pin2>")
+@auth.login_required
 def triggerPinJSON(pin,pin2):
    try:
       GPIO.setup(pin, GPIO.OUT)
@@ -146,6 +149,7 @@ def verify_password(username_or_token, password):
 
 
 @app.route('/api/users', methods=['POST'])
+@auth.login_required
 def new_user():
     username = request.json.get('username')
     password = request.json.get('password')
