@@ -1,4 +1,4 @@
-from flask import Flask, abort, request, jsonify, g, url_for,render_template
+from flask import Flask, abort, request, jsonify, g, url_for, render_template
 from flask_sqlalchemy import SQLAlchemy
 from flask_httpauth import HTTPBasicAuth
 from passlib.apps import custom_app_context as pwd_context
