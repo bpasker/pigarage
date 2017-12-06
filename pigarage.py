@@ -59,7 +59,7 @@ def readPinJSON(pin):
    return jsonify(response)
 
 #Trigger garage change
-@app.route("/triggerGarage/<pin>")
+@app.route("/triggerPinJSON/<pin>")
 def triggerPinJSON(pin):
    try:
       GPIO.setup(int(pin), GPIO.OUT)
