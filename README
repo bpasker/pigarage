@@ -8,17 +8,47 @@ These instructions will get you a copy of the project up and running on your loc
 
 ### Prerequisites
 
-What things you need to install the software and how to install them
+sudo apt-get install -y  python-pip
+sudo apt-get install -y git
+sudo apt-get install -y supervisor
+sudo apt-get install -y sqlite3
+sudo pip install -y pyopenssl
+sudo pip install -y flask 
+sudo pip install -y SQLAlchemy
+sudo pip install -y Flask-HTTPAuth
+sudo pip install -y passlib[bcrypt]
+
+
+sudo vim /etc/supervisor/conf.d/pigarage_project.conf 
+
+File Start ----------------------------------------
+[program:pigarage]
+command = python pigarage.py
+directory = /path/to/cloned/pigarage
+autostart = true
+autorestart = true
+environment=PIGARAGE_SETTINGS="/path/to/cloned/pigarage/pigarage/settings/settings.cfg"
+File End -----------------------------------------
 
 ```
-Give examples
+Example settings file:
+File Start ----------------------------------------
+import os
+basedir = os.path.abspath(os.path.dirname(__file__))
+
+SECRET_KEY = 'Type a lot of info so you have a good secret'
+SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(basedir, 'pigarage.db')
+SQLALCHEMY_MIGRATE_REPO = os.path.join(basedir, 'db_repository')
+
+#SSL Config
+SSL_KEY = '/path/to//cloned/pigarage/SSL/server.key'
+SSL_CRT = '/path/to/cloned/pigarage/SSL/server.crt'
+File End -----------------------------------------
 ```
 
 ### Installing
 
-A step by step series of examples that tell you have to get a development env running
-
-Say what the step will be
+/git clone 
 
 ```
 Give the example
