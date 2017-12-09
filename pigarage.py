@@ -173,6 +173,15 @@ def get_user(id):
     return jsonify({'username': user.username})
 
 
+@app.route('/api/users/list')
+@auth.login_required
+def get_user_list(id):
+    users = User.query.get(*)
+    if not user:
+        abort(400)
+    return jsonify({'username': users.id})
+
+
 @app.route('/api/users/delete/<int:id>')
 @auth.login_required
 def del_user(id):
