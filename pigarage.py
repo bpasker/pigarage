@@ -176,11 +176,11 @@ def get_user(id):
 @app.route('/api/users/list')
 @auth.login_required
 def get_user_list():
-    users = ''
+    users = str()
     for instance in db.session.query(User).order_by(User.id):
        if not users:
          users = ',' + users
-       users =  users + 'username:'+ str(instance.id)
+       users =  users + 'id:'+ str(instance.id)
     if not users:
         abort(400)
     return jsonify(users)
