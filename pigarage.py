@@ -181,7 +181,7 @@ def get_user_list():
        if not users:
          users = ',' + users
        users =  users + 'username:'+ str(instance.id)
-    if not user:
+    if not users:
         abort(400)
     return jsonify(users)
 
