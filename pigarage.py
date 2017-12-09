@@ -179,7 +179,7 @@ def get_user_list():
     for instance in db.session.query(User).order_by(User.id):
        if not users:
          users = "," + users
-       users =  users + 'username': instance.id
+       users =  users + 'username:'+ instance.id
     if not user:
         abort(400)
     return jsonify(users)
