@@ -176,9 +176,9 @@ def get_user(id):
 @app.route('/api/users/list')
 @auth.login_required
 def get_user_list():
-    users = str()
+    users = ''
     for instance in db.session.query(User).order_by(User.id):
-       if not users:
+       if users:
          users = ',' + users
        users =  users + 'id:'+ str(instance.id)
     if not users:
