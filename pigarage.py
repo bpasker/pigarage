@@ -176,10 +176,15 @@ def get_user(id):
 @app.route('/api/users/list')
 @auth.login_required
 def get_user_list(id):
-    users = User.query.get(*)
+    for instance in session.query(User).order_by(User.id)
+       if not users:
+         users = "," + users
+       users =  users + 'username': instance.id
     if not user:
         abort(400)
-    return jsonify({'username': users.id})
+    return jsonify(users)
+
+    
 
 
 @app.route('/api/users/delete/<int:id>')
