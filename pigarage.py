@@ -180,8 +180,8 @@ def del_user(id):
     if not user:
         abort(400)
 
-   db.session.delete(user)
-   db.session.commit()
+    db.session.delete(user)
+    db.session.commit()
     return jsonify({'username': user.username})
 
 
