@@ -178,7 +178,7 @@ def get_user(id):
 def get_user_list():
     users = ''
     for instance in db.session.query(User).order_by(User.id):
-       if not users:
+       if users:
          users = users + ","
        users =  users + 'id:'+ str(instance.id)
     if not users:
