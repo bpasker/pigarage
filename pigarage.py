@@ -173,6 +173,18 @@ def get_user(id):
     return jsonify({'username': user.username})
 
 
+@app.route('/api/users/delete/<int:id>')
+@auth.login_required
+def del_user(id):
+    user = User.query.get(id)
+    if not user:
+        abort(400)
+
+   db.session.delete(user)
+   db.session.commit()
+    return jsonify({'username': user.username})
+
+
 @app.route('/api/token')
 @auth.login_required
 def get_auth_token():

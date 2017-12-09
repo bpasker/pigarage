@@ -18,6 +18,17 @@ sudo pip install -y SQLAlchemy
 sudo pip install -y Flask-HTTPAuth
 sudo pip install -y passlib[bcrypt]
 
+```
+
+### Installing
+
+/git clone 
+
+```
+Give the example
+```
+
+### Configuration
 
 sudo vim /etc/supervisor/conf.d/pigarage_project.conf 
 
@@ -44,15 +55,6 @@ SQLALCHEMY_MIGRATE_REPO = os.path.join(basedir, 'db_repository')
 SSL_KEY = '/path/to//cloned/pigarage/SSL/server.key'
 SSL_CRT = '/path/to/cloned/pigarage/SSL/server.crt'
 File End -----------------------------------------
-```
-
-### Installing
-
-/git clone 
-
-```
-Give the example
-```
 
 And repeat
 
