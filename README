@@ -8,29 +8,21 @@ These instructions will get you a copy of the project up and running on your loc
 
 ### Prerequisites
 
-sudo apt-get install -y  python-pip
+sudo apt-get update
 sudo apt-get install -y git
-sudo apt-get install -y supervisor
-sudo apt-get install -y sqlite3
-sudo pip install -y pyopenssl
-sudo pip install -y flask 
-sudo pip install -y SQLAlchemy
-sudo pip install -y Flask-HTTPAuth
-sudo pip install -y passlib[bcrypt]
 
 ```
 
 ### Installing
 
-/git clone 
-
-```
-Give the example
-```
+git clone https://github.com/bpasker/pigarage.git
+cd pigarage/
+chmod 755 setup.sh
+./setup.sh
 
 ### Configuration
 
-sudo vim /etc/supervisor/conf.d/pigarage_project.conf 
+sudo nano /etc/supervisor/conf.d/pigarage_project.conf 
 
 File Start ----------------------------------------
 [program:pigarage]
@@ -55,6 +47,24 @@ SQLALCHEMY_MIGRATE_REPO = os.path.join(basedir, 'db_repository')
 SSL_KEY = '/path/to//cloned/pigarage/SSL/server.key'
 SSL_CRT = '/path/to/cloned/pigarage/SSL/server.crt'
 File End -----------------------------------------
+
+
+
+### Read in config
+sudo supervisorctl reread
+
+sudo supervisorctl update
+
+sudo supervisorctl start pigarage
+
+
+
+
+
+
+
+
+
 
 And repeat
 
