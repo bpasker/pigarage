@@ -222,10 +222,10 @@ def get_auth_token():
     return jsonify({{'token': token.decode('ascii'), 'duration': 600}})
 
 
-@app.route(' ')
-@auth.login_required
-def get_resource():
-    return jsonify({{'data': 'Hello, %s!' % g.user.username}})
+#@app.route(' ')
+#@auth.login_required
+#def get_resource():
+#    return jsonify({{'data': 'Hello, %s!' % g.user.username}})
 
 if __name__ == "__main__":
    app.run(host='0.0.0.0', port=80, debug=True)
