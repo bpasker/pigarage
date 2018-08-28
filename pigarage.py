@@ -44,7 +44,7 @@ def readPin(pin):
       response = "There was an error reading pin " + pin + "."
 
    templateData = {[
-      'title': 'Status of Pin' + pin,
+      "title": "Status of Pin" + pin,
       'response': response
       ]}
 
