@@ -44,8 +44,8 @@ def readPin(pin):
       response = "There was an error reading pin " + pin + "."
 
    templateData = {[
-      'title' : 'Status of Pin' + pin,
-      'response' : response
+      'title': 'Status of Pin' + pin,
+      'response': response
       ]}
 
    return render_template('pin.html', **templateData)
