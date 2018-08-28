@@ -43,10 +43,10 @@ def readPin(pin):
    except:
       response = "There was an error reading pin " + pin + "."
 
-   templateData = {{
+   templateData = {
       'title': 'Status of Pin' + pin,
       'response': response
-      }}
+      }
 
    return render_template('pin.html', **templateData)
 
@@ -57,20 +57,20 @@ def readPinJSON(pin):
    try:
       GPIO.setup(int(pin), GPIO.IN)
       if GPIO.input(int(pin)) == True:
-         response = {{
+         response = {
                      'pin': pin,
                      'status': 'high'
-         }}
+         }
       else:
-         response = {{
+         response = {
                      'pin': pin,
                      'status': 'low'
-         }}
+         }
    except:
-      response = {{
+      response = {
                      'pin': pin,
                      'status': 'error'
-         }}
+         }
 
    return jsonify(response)
 
@@ -88,25 +88,25 @@ def triggerPinJSON(pin,pin2):
          GPIO.output(pin, GPIO.HIGH)
          sleep(.5)
          GPIO.output(pin, GPIO.LOW)
-         response = {{
+         response = {
             'status': 'Opening'
-         }}
+         }
       elif GPIO.input(pin2) == False:
          GPIO.output(pin, GPIO.HIGH)
          sleep(.5)
          GPIO.output(pin, GPIO.LOW)
-         response = {{
+         response = {
             'status': 'Closing'
-         }}
+         }
       else:
-         response = {{
+         response = {
             'status': 'Failed to get pin2 state'
-         }}
+         }
    except:
-      response = {{
+      response = {
                      'pin': pin,
                      'status': 'error'
-         }}
+         }
          
    return jsonify(response)
 
@@ -176,7 +176,7 @@ def new_user():
     db.session.commit()
 
     return (jsonify({{'username': user.username}}), 201,
-            {{'Location': url_for('get_user', id=user.id, _external=True)}})
+            {'Location': url_for('get_user', id=user.id, _external=True)})
 
 
 #[]
@@ -185,7 +185,7 @@ def get_user(id):
     user = User.query.get(id)
     if not user:
         abort(400)
-    return jsonify({{'username': user.username}})
+    return jsonify({'username': user.username})
 
 
 @app.route('/api/users/list')
@@ -212,14 +212,14 @@ def del_user(id):
 
     db.session.delete(user)
     db.session.commit()
-    return jsonify({{'username': user.username}})
+    return jsonify({'username': user.username})
 
 
 @app.route('/api/token')
 @auth.login_required
 def get_auth_token():
     token = g.user.generate_auth_token(600)
-    return jsonify({{'token': token.decode('ascii'), 'duration': 600}})
+    return jsonify({'token': token.decode('ascii'), 'duration': 600})
 
 
 #@app.route(' ')
