@@ -43,10 +43,10 @@ def readPin(pin):
    except:
       response = "There was an error reading pin " + pin + "."
 
-   templateData = {[
-      "title": "Status of Pin" + pin,
+   templateData = {{
+      'title': 'Status of Pin' + pin,
       'response': response
-      ]}
+      }}
 
    return render_template('pin.html', **templateData)
 
