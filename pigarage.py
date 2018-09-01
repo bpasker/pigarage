@@ -44,8 +44,8 @@ def readPin(pin):
       response = "There was an error reading pin " + pin + "."
 
    templateData = {
-      'title': 'Status of Pin' + pin,
-      'response': response
+      "title": "Status of Pin" + pin,
+      "response": response
       }
 
    return render_template('pin.html', **templateData)
@@ -58,18 +58,18 @@ def readPinJSON(pin):
       GPIO.setup(int(pin), GPIO.IN)
       if GPIO.input(int(pin)) == True:
          response = {
-                     'pin': pin,
-                     'status': 'high'
+                     "pin": pin,
+                     "status": "high"
          }
       else:
          response = {
-                     'pin': pin,
-                     'status': 'low'
+                     "pin": pin,
+                     "status": "low"
          }
    except:
       response = {
-                     'pin': pin,
-                     'status': 'error'
+                     "pin": pin,
+                     "status": "error"
          }
 
    return jsonify(response)
@@ -89,23 +89,23 @@ def triggerPinJSON(pin,pin2):
          sleep(.5)
          GPIO.output(pin, GPIO.LOW)
          response = {
-            'status': 'Opening'
+            "status": "Opening"
          }
       elif GPIO.input(pin2) == False:
          GPIO.output(pin, GPIO.HIGH)
          sleep(.5)
          GPIO.output(pin, GPIO.LOW)
          response = {
-            'status': 'Closing'
+            "status": "Closing"
          }
       else:
          response = {
-            'status': 'Failed to get pin2 state'
+            "status": "Failed to get pin2 state"
          }
    except:
       response = {
-                     'pin': pin,
-                     'status': 'error'
+                     "pin": pin,
+                     "status": "error"
          }
          
    return jsonify(response)
@@ -125,7 +125,7 @@ class User(db.Model):
 
     def generate_auth_token(self, expiration=600):
         s = Serializer(app.config['SECRET_KEY'], expires_in=expiration)
-        return s.dumps({'id': self.id})
+        return s.dumps({"id": self.id})
 
     @staticmethod
     def verify_auth_token(token):
@@ -175,8 +175,8 @@ def new_user():
     #Commit to DB
     db.session.commit()
 
-    return (jsonify({{'username': user.username}}), 201,
-            {'Location': url_for('get_user', id=user.id, _external=True)})
+    return (jsonify({{"username": user.username}}), 201,
+            {"Location": url_for('get_user', id=user.id, _external=True)})
 
 
 #[]
@@ -185,7 +185,7 @@ def get_user(id):
     user = User.query.get(id)
     if not user:
         abort(400)
-    return jsonify({'username': user.username})
+    return jsonify({"username": user.username})
 
 
 @app.route('/api/users/list')
@@ -212,14 +212,14 @@ def del_user(id):
 
     db.session.delete(user)
     db.session.commit()
-    return jsonify({'username': user.username})
+    return jsonify({"username": user.username})
 
 
 @app.route('/api/token')
 @auth.login_required
 def get_auth_token():
     token = g.user.generate_auth_token(600)
-    return jsonify({'token': token.decode('ascii'), 'duration': 600})
+    return jsonify({"token": token.decode('ascii'), "duration": 600})
 
 
 #@app.route(' ')
