@@ -25,6 +25,8 @@ auth = HTTPBasicAuth()
 #Setup GPIO for PI
 GPIO.setmode(GPIO.BCM)
 
+GPIO.cleanup()
+
 GPIO.setup(23, GPIO.OUT)
 GPIO.output(23, GPIO.LOW)
 GPIO.setup(24, GPIO.IN)
