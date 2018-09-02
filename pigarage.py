@@ -81,14 +81,14 @@ def triggerPinJSON(pin,pin2):
       GPIO.setup(pin, GPIO.OUT)
       GPIO.setup(pin2, GPIO.IN)
 
-      if GPIO.input(pin2) == True:
+      if GPIO.input(pin2) == False:
          GPIO.output(pin, GPIO.HIGH)
          sleep(.5)
          GPIO.output(pin, GPIO.LOW)
          response = {
             "status":"Opening"
          }
-      elif GPIO.input(pin2) == False:
+      elif GPIO.input(pin2) == True:
          GPIO.output(pin, GPIO.HIGH)
          sleep(.5)
          GPIO.output(pin, GPIO.LOW)
