@@ -89,23 +89,23 @@ def triggerPinJSON(pin,pin2):
          sleep(.5)
          GPIO.output(pin, GPIO.LOW)
          response = {
-            "status": "Opening"
+            "status":"Opening"
          }
       elif GPIO.input(pin2) == False:
          GPIO.output(pin, GPIO.HIGH)
          sleep(.5)
          GPIO.output(pin, GPIO.LOW)
          response = {
-            "status": "Closing"
+            "status":"Closing"
          }
       else:
          response = {
-            "status": "Failed to get pin2 state"
+            "status":"Failed to get pin2 state"
          }
    except:
       response = {
-                     "pin": pin,
-                     "status": "error"
+                     "pin":pin,
+                     "status":"error"
          }
          
    return jsonify(response)
