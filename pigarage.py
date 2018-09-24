@@ -27,7 +27,7 @@ GPIO.setmode(GPIO.BCM)
 
 GPIO.cleanup()
 
-GPIO.setup(24 GPIO.IN)
+GPIO.setup(24, GPIO.IN)
 
 #Get status of a pin on the PI
 @app.route("/readPin/<pin>")
