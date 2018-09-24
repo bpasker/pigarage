@@ -27,6 +27,8 @@ GPIO.setmode(GPIO.BCM)
 
 GPIO.cleanup()
 
+GPIO.setup(24 GPIO.IN)
+
 #Get status of a pin on the PI
 @app.route("/readPin/<pin>")
 @auth.login_required
@@ -52,7 +54,7 @@ def readPin(pin):
 @auth.login_required
 def readPinJSON(pin):
    try:
-      GPIO.setup(int(pin), GPIO.IN)
+      #GPIO.setup(int(pin), GPIO.IN)
       if GPIO.input(int(pin)) == True:
          response = {
                      "pin": pin,
