@@ -51,7 +51,7 @@ def readPin(pin):
 
 #Return pin status in JSON
 @app.route("/api/readPin/<pin>")
-#@auth.login_required
+@auth.login_required
 def readPinJSON(pin):
    try:
       #GPIO.setup(int(pin), GPIO.IN)
