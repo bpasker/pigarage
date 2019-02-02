@@ -29,19 +29,23 @@ GPIO.cleanup()
 
 GPIO.setup(24, GPIO.IN)
 
-#Get status of a pin on the PI
+#Return pin status in webpage
 @app.route("/readPin/<pin>")
 @auth.login_required
 def readPin(pin):
    try:
+      #Setup passed in as input 
       GPIO.setup(int(pin), GPIO.IN)
+      
+      #Set response of the pin depending of it is high or low
       if GPIO.input(int(pin)) == True:
          response = "Pin number " + pin + " is high!"
       else:
          response = "Pin number " + pin + " is low!"
    except:
       response = "There was an error reading pin " + pin + "."
-
+   
+   #Populate template with pin and response
    templateData = {
       "title": "Status of Pin" + pin,
       "response": response
@@ -54,7 +58,6 @@ def readPin(pin):
 @auth.login_required
 def readPinJSON(pin):
    try:
-      #GPIO.setup(int(pin), GPIO.IN)
       if GPIO.input(int(pin)) == True:
          response = {
                      "pin": pin,
