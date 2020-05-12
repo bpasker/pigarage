@@ -76,6 +76,7 @@ def readPinJSON(pin):
 
    return jsonify(response)
 
+
 #Trigger garage change
 #Pin 1 is for the relay
 #Pin 2 is for the reed switch
@@ -230,5 +231,5 @@ def get_auth_token():
 #    return jsonify({{'data': 'Hello, %s!' % g.user.username}})
 
 if __name__ == "__main__":
-#   app.run(host='0.0.0.0', port=80, debug=True)
-  app.run(host='0.0.0.0', port=443, debug=False, ssl_context=context, threaded=True)
+   app.run()
+#  app.run(host='0.0.0.0', port=443, debug=False, ssl_context=context, threaded=True)

@@ -57,6 +57,8 @@ sudo supervisorctl update
 
 sudo supervisorctl start pigarage
 
+sudo supervisorctl restart pigarage
+
 
 
 
