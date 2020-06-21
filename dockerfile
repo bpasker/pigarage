@@ -22,5 +22,3 @@ COPY pigarage.py /pigarage/pigarage.py
 COPY pigarage_project.conf /etc/supervisor/conf.d/pigarage_project.conf 
 
 RUN systemctl enable supervisor
-
-#RUN supervisorctl start pigarage
