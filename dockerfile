@@ -1,4 +1,4 @@
-FROM arm32v6/debian
+FROM arm32v7/debian
 
 RUN apt-get update
 RUN apt-get install -y build-essential libssl-dev libffi-dev python3-dev python3-pip supervisor sqlite3 systemd
