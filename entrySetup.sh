@@ -1,6 +1,7 @@
 #!/bin/bash
 
-myDomain=$1
+myDomain=$1 
+myEmail=$2
 
 # Settings Path
 settingsFile=/settings/settings.cfg
@@ -24,6 +25,10 @@ fi
 sed -i "s/replaceme/$myDomain/g" /etc/nginx/sites-enabled/flask_settings
 mkdir /etc/letsencrypt/temp
 openssl req -subj "/CN=$myDomain/O=$myDomain/C=US" -new -newkey rsa:2048 -days 365 -nodes -x509 -keyout /etc/letsencrypt/temp/privkey.pem -out /etc/letsencrypt/temp/fullchain.cert
+
+service nginx start
+
+certbot --nginx --agree-tos --no-eff-email -m $myEmail -d $myDomain
 
 service supervisor start
 

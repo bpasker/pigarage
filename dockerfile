@@ -29,5 +29,6 @@ RUN chmod 700 /pigarage/entrySetup.sh
 
 #Setup NGINX
 ENV myDomain replacemeENV
+ENV myEmail myEmailAddress
 
-CMD /pigarage/entrySetup.sh ${myDomain}
+CMD /pigarage/entrySetup.sh ${myDomain} ${myEmail}
