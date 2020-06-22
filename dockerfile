@@ -1,7 +1,7 @@
 FROM arm32v7/debian
 
 RUN apt-get update
-RUN apt-get install -y build-essential libssl-dev libffi-dev python3-dev python3-pip supervisor sqlite3 vim nginx
+RUN apt-get install -y build-essential libssl-dev libffi-dev python3-dev python3-pip supervisor sqlite3 vim nginx certbot python-certbot-nginx
 RUN pip3 install --upgrade pip
 RUN pip3 install -U pip setuptools
 RUN pip3 install cryptography
