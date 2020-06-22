@@ -22,6 +22,7 @@ else
 fi
 
 sed -i "s/replaceme/$myDomain/g" /etc/nginx/sites-enabled/flask_settings
+mkdir /etc/letsencrypt/temp
 openssl req -subj "/CN=$myDomain/O=$myDomain/C=US" -new -newkey rsa:2048 -days 365 -nodes -x509 -keyout /etc/letsencrypt/temp/privkey.pem -out /etc/letsencrypt/temp/fullchain.cert
 
 service supervisor start
