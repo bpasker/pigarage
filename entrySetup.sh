@@ -7,18 +7,16 @@ settingsFile=/settings/settings.cfg
 if [ -f "$settingsFile" ]; then
     echo "$settingsFile exists."
 else
-    cp /pigarage/default/defaultsettings.cfg /settings/settings.cfg
-    supervisorctl restart pigarage
+    cp /pigarage/default/defaultSettings.cfg /settings/settings.cfg
 fi
 
 # Create default DB with default user
 defaultDB=/settings/pigarage.db
+
 if [ -f "$defaultDB" ]; then
     echo "$defaultDB exists."
 else
-    cp /pigarage/default/defaultpigarage.db /settings/pigarage.db
-    supervisorctl restart pigarage
-    supervisorctl 
+    cp /pigarage/default/defaultPigarage.db /settings/pigarage.db
 fi
 
 service supervisor start

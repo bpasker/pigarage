@@ -18,10 +18,12 @@ RUN mkdir /pigarage
 COPY templates /pigarage/templates/pin.html
 COPY pigarage.py /pigarage/pigarage.py
 COPY settings/defaultSettings.cfg /pigarage/default/defaultSettings.cfg
-COPY settings/defaultPigarage.db /pigarage/default/defaultpigarage.db
+COPY settings/defaultPigarage.db /pigarage/default/defaultPigarage.db
 COPY entrySetup.sh /pigarage/entrySetup.sh
 
 #Copy config file for supervisord
 COPY pigarage_project.conf /etc/supervisor/conf.d/pigarage_project.conf 
+
+RUN chmod 700 /pigarage/entrySetup.sh
 
 CMD /pigarage/entrySetup.sh
