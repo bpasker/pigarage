@@ -231,5 +231,5 @@ def get_auth_token():
 #    return jsonify({{'data': 'Hello, %s!' % g.user.username}})
 
 if __name__ == "__main__":
-   app.run(host='0.0.0.0')
+   app.run()
 #  app.run(host='0.0.0.0', port=443, debug=False, ssl_context=context, threaded=True)

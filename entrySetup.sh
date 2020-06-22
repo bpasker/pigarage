@@ -1,5 +1,7 @@
 #!/bin/bash
 
+myDomain=$1
+
 # Settings Path
 settingsFile=/settings/settings.cfg
 
@@ -18,6 +20,8 @@ if [ -f "$defaultDB" ]; then
 else
     cp /pigarage/default/defaultPigarage.db /settings/pigarage.db
 fi
+
+sed -i 's/replaceme/$($myDomain)/g' /etc/nginx/sites-enabled/flask_settings
 
 service supervisor start
 
