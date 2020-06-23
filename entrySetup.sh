@@ -35,7 +35,7 @@ service nginx start
 
 # Enable real SSL certs via https://letsencrypt.org/
 if [ $myCertBot=true ] ; then
-    certbot --nginx --agree-tos --no-eff-email -m $myEmail -d $myDomain
+    certbot --nginx --agree-tos --no-redirect --no-eff-email -m $myEmail -d $myDomain
 fi
 
 # Start Supervisor to enable pigarage
