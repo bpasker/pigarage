@@ -34,7 +34,7 @@ openssl req -subj "/CN=$myDomain/O=$myDomain/C=US" -new -newkey rsa:2048 -days 3
 service nginx start
 
 # Enable real SSL certs via https://letsencrypt.org/
-if [ $myCertBot=true ] ; then
+if $myCertBot ; then
     certbot --nginx --agree-tos --no-redirect --no-eff-email -m $myEmail -d $myDomain
 fi
 
