@@ -58,6 +58,9 @@ def readPin(pin):
 @auth.login_required
 def readPinJSON(pin):
    try:
+      #Setup passed in as input 
+      GPIO.setup(int(pin), GPIO.IN)
+
       if GPIO.input(int(pin)) == True:
          response = {
                      "pin": pin,
