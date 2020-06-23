@@ -30,5 +30,6 @@ RUN chmod 700 /pigarage/entrySetup.sh
 #Setup NGINX
 ENV myDomain replacemeENV
 ENV myEmail myEmailAddress
+ENV myCertBot myCertBot
 
-CMD /pigarage/entrySetup.sh ${myDomain} ${myEmail}
+CMD /pigarage/entrySetup.sh ${myDomain} ${myEmail} ${myCertBot}
