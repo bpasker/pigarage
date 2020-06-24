@@ -45,7 +45,7 @@ if [ -d "$letsencryptKey" ]; then
 else
     #If no key is present the clean the old directory and create symlink to settings folder
     rm -rf /etc/letsencrypt/
-    ln -s /settings/letsencrypt /etc/letsencrypt/
+    ln -s  /etc/letsencrypt/ /settings/letsencrypt
 fi
 
 # Check if letsencrypt folder is present
