@@ -53,6 +53,9 @@ fi
 if [ -d "$letsencryptKey" ]; then
     echo "$letsencryptKey exists."
 
+    # Restore backup of flask_settings so cert path is correct
+    cp /settings/letsencrypt/flask_settings_backup /etc/nginx/sites-enabled/flask_settings
+
     # Start nginx for ingress
     service nginx start
 else
@@ -68,6 +71,8 @@ else
     if $myCertBot ; then
         certbot --nginx --agree-tos --no-redirect --no-eff-email -m $myEmail -d $myDomain
     fi
+
+    cp /etc/nginx/sites-enabled/flask_settings /settings/letsencrypt/flask_settings_backup
 fi
 
 # Start Supervisor to enable pigarage
