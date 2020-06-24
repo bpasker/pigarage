@@ -37,7 +37,7 @@ fi
 sed -i "s/replaceme/$myDomain/g" /etc/nginx/sites-enabled/flask_settings
 
 # letsencrypt keyfolder
-letsencryptKey=/settings/letsencrypt/keys
+letsencryptKey=/etc/letsencrypt/keys
 
 # Check if letsencrypt folder is present
 if [ -d "$letsencryptKey" ]; then
