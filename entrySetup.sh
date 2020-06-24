@@ -43,9 +43,10 @@ letsencryptKey=/etc/letsencrypt/keys
 if [ -d "$letsencryptKey" ]; then
     echo "$letsencryptKey exists."
 else
+    echo "Cleaning default /etc/letsencrypt folder."
     #If no key is present the clean the old directory and create symlink to settings folder
-    rm -rf /etc/letsencrypt/
-    ln -s  /etc/letsencrypt/ /settings/letsencrypt
+    rm -rf /etc/letsencrypt
+    ln -s /settings/letsencrypt /etc/letsencrypt
 fi
 
 # Check if letsencrypt folder is present
