@@ -14,22 +14,42 @@ RUN pip3 install flask_sqlalchemy
 RUN pip3 install Flask-HTTPAuth
 RUN pip3 install RPi.GPIO
 
+# Add core project folder
 RUN mkdir /pigarage
+
+# Copy core garage python code
 COPY templates /pigarage/templates/pin.html
 COPY pigarage.py /pigarage/pigarage.py
+
+# Add Config and Default DB
 COPY settings/defaultSettings.cfg /pigarage/default/defaultSettings.cfg
 COPY settings/defaultPigarage.db /pigarage/default/defaultPigarage.db
-COPY entrySetup.sh /pigarage/entrySetup.sh
+
+# Add proxy config for nginx to flask
 COPY settings/flaskSettings /etc/nginx/sites-enabled/flask_settings
 
-#Copy config file for supervisord
-COPY pigarage_project.conf /etc/supervisor/conf.d/pigarage_project.conf 
+# Copy config file for supervisord to start flask 
+COPY settings/pigarage_project.conf /etc/supervisor/conf.d/pigarage_project.conf 
 
+# Copy notify code
+COPY notify_me.py /pigarage/notify_me.py
+
+COPY settings/defaultnotificationSettings.ini /pigarage/default/notificationSettings.ini
+
+
+# Add setup script
+COPY entrySetup.sh /pigarage/entrySetup.sh
 RUN chmod 700 /pigarage/entrySetup.sh
 
-#Setup NGINX
+# Setup NGINX and Letsencrypt
 ENV myDomain replacemeENV
 ENV myEmail myEmailAddress
 ENV myCertBot myCertBot
 
-CMD /pigarage/entrySetup.sh ${myDomain} ${myEmail} ${myCertBot}
+# Notification Settings
+ENV enableNotifications defaultenableNotifications
+ENV emailSender defaultemailSender
+ENV textTo defaultemailSender
+
+# Start script call with variables
+CMD /pigarage/entrySetup.sh ${myDomain} ${myEmail} ${myCertBot} ${enableNotifications} ${emailSender} ${emailSender}

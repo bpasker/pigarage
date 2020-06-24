@@ -12,6 +12,12 @@ import base64
 from gpiozero import Button
 from time import sleep
 
+# Config Parser
+import configparser
+
+config = configparser.ConfigParser()
+config.read("/settings/notificationSettings.ini")
+
 # If modifying these scopes, delete the file token.pickle.
 SCOPES = ['https://www.googleapis.com/auth/gmail.send']
 
@@ -84,8 +90,8 @@ def main():
         print("Closed")
     else:
         print("Open")
-        mymessage = create_message(sender="user@gmail.com",to="000000000@vtext.com",subject="Garage Status",message_text="Your Garage is Open")
-        send_message(gservice,"user@gmail.com",mymessage)
+        mymessage = create_message(sender=config['default']['emailSender'],to=config['default']['textTo'],subject="Garage Status",message_text="Your Garage is Open")
+        send_message(gservice,config['default']['emailSender'],mymessage)
 
 if __name__ == '__main__':
     main()

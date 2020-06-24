@@ -3,6 +3,9 @@
 myDomain=$1 
 myEmail=$2
 myCertBot=$3
+enableNotifications=$4
+emailSender=$5
+textTo=$6
 
 # Settings Path
 settingsFile=/settings/settings.cfg
@@ -77,6 +80,20 @@ fi
 
 # Start Supervisor to enable pigarage
 service supervisor start
+
+#
+/pigarage/default/notificationSettings.ini
+
+# letsencrypt keyfolder
+defaultnotificationSettings=/settings/notificationSettings.ini
+
+# Check if letsencrypt folder is present
+if [ -f "$defaultnotificationSettings" ]; then
+    echo "$defaultnotificationSettings exists."
+else
+    echo "Adding $defaultnotificationSettings"
+    cp /pigarage/default/defaultnotificationSettings.ini /settings/notificationSettings.ini
+fi
 
 # Run bash so docker doesn't stop
 bash
