@@ -1,100 +1,20 @@
-# Project Title
-
-One Paragraph of project description goes here
+# piGarage
 
 ## Getting Started
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
-
-### Prerequisites
-
-sudo apt-get update
-sudo apt-get install -y git
-
-```
-
-### Installing
-
-git clone https://github.com/bpasker/pigarage.git
-cd pigarage/
-chmod 755 setup.sh
-./setup.sh
-
-### Configuration
-
-sudo nano /etc/supervisor/conf.d/pigarage_project.conf 
-
-File Start ----------------------------------------
-[program:pigarage]
-command = python pigarage.py
-directory = /path/to/cloned/pigarage
-autostart = true
-autorestart = true
-environment=PIGARAGE_SETTINGS="/path/to/cloned/pigarage/pigarage/settings/settings.cfg"
-File End -----------------------------------------
-
-```
-Example settings file:
-File Start ----------------------------------------
-import os
-basedir = os.path.abspath(os.path.dirname(__file__))
-
-SECRET_KEY = 'Type a lot of info so you have a good secret'
-SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(basedir, 'pigarage.db')
-SQLALCHEMY_MIGRATE_REPO = os.path.join(basedir, 'db_repository')
-
-#SSL Config
-SSL_KEY = '/path/to//cloned/pigarage/SSL/server.key'
-SSL_CRT = '/path/to/cloned/pigarage/SSL/server.crt'
-File End -----------------------------------------
+Add oauth setup
+https://console.developers.google.com/apis/credentials
 
 
-
-### Read in config
-sudo supervisorctl reread
-
-sudo supervisorctl update
-
-sudo supervisorctl start pigarage
-
-sudo supervisorctl restart pigarage
-
-
-
-
-
-
-
-
-
-
-And repeat
-
-```
-until finished
-```
-
-End with an example of getting some data out of the system or using it for a little demo
-
-## Running the tests
-
-Explain how to run the automated tests for this system
-
-### Break down into end to end tests
-
-Explain what these tests test and why
-
-```
-Give an example
-```
-
-### And coding style tests
-
-Explain what these tests test and why
-
-```
-Give an example
-```
+docker run \
+    --privileged \
+    -v /home/pi/settings:/settings \
+    -e myDomain=yourdomain.com -e myEmail=youremail@gmail.com -e myCertBot=true \
+    -e enableNotifications=true -e emailSender=youremail@gmail.com -e textTo=0000000000@vtext.com \
+    --restart unless-stopped \
+    -it \
+    -p 80:80 -p 443:443 \
+    3cec813484cd
 
 ## Deployment
 
@@ -102,9 +22,7 @@ Add additional notes about how to deploy this on a live system
 
 ## Built With
 
-* [Dropwizard](http://www.dropwizard.io/1.0.2/docs/) - The web framework used
-* [Maven](https://maven.apache.org/) - Dependency Management
-* [ROME](https://rometools.github.io/rome/) - Used to generate RSS Feeds
+
 
 ## Contributing
 

@@ -14,6 +14,10 @@ RUN pip3 install flask_sqlalchemy
 RUN pip3 install Flask-HTTPAuth
 RUN pip3 install RPi.GPIO
 
+# Google API
+RUN pip3 install google-api-python-client google-auth-httplib2 google-auth-oauthlib
+RUN apt-get install -y python3-gpiozero
+
 # Add core project folder
 RUN mkdir /pigarage
 
