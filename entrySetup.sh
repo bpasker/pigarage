@@ -106,5 +106,9 @@ else
     cp /settings/token.pickle /pigarage/token.pickle
 fi
 
+# Replace email sender
+sed -i "s/user@gmail.com/$emailSender/g" /settings/notificationSettings.ini
+sed -i "s/000000000@vtext.com/$textTo/g" /settings/notificationSettings.ini
+
 # Run bash so docker doesn't stop
 bash
