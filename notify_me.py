@@ -75,7 +75,7 @@ def main():
             creds.refresh(Request())
         else:
             flow = InstalledAppFlow.from_client_secrets_file(
-                'credentials.json', SCOPES)
+                '/settings/credentials.json', SCOPES)
             creds = flow.run_local_server()
         # Save the credentials for the next run
         with open('token.pickle', 'wb') as token:
@@ -90,8 +90,8 @@ def main():
         print("Closed")
     else:
         print("Open")
-        mymessage = create_message(sender=config['default']['emailSender'],to=config['default']['textTo'],subject="Garage Status",message_text="Your Garage is Open")
-        send_message(gservice,config['default']['emailSender'],mymessage)
+        mymessage = create_message(sender=config['DEFAULT']['emailSender'],to=config['DEFAULT']['textTo'],subject="Garage Status",message_text="Your Garage is Open")
+        send_message(gservice,config['DEFAULT']['emailSender'],mymessage)
 
 if __name__ == '__main__':
     main()

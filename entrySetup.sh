@@ -84,15 +84,26 @@ service supervisor start
 #
 /pigarage/default/notificationSettings.ini
 
-# letsencrypt keyfolder
+# defaultnotificationSettings file
 defaultnotificationSettings=/settings/notificationSettings.ini
 
-# Check if letsencrypt folder is present
+# Check if defaultnotificationSettings file is present
 if [ -f "$defaultnotificationSettings" ]; then
     echo "$defaultnotificationSettings exists."
 else
     echo "Adding $defaultnotificationSettings"
     cp /pigarage/default/defaultnotificationSettings.ini /settings/notificationSettings.ini
+fi
+
+# pickel file
+pickle=/pigarage/token.pickle
+
+# Check if defaultnotificationSettings file is present
+if [ -f "$pickle" ]; then
+    echo "$pickle exists."
+else
+    echo "Adding $pickle"
+    cp /settings/token.pickle /pigarage/token.pickle
 fi
 
 # Run bash so docker doesn't stop
