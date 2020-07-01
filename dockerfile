@@ -54,4 +54,4 @@ ENV emailSender defaultemailSender
 ENV textTo defaultemailSender
 
 # Start script call with variables
-CMD /pigarage/entrySetup.sh ${myDomain} ${myEmail} ${myCertBot} ${enableNotifications} ${emailSender} ${emailSender}
+CMD /pigarage/entrySetup.sh ${myDomain} ${myEmail} ${myCertBot} ${enableNotifications} ${emailSender} ${textTo}
