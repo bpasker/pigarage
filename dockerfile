@@ -38,6 +38,7 @@ COPY settings/pigarage_project.conf /etc/supervisor/conf.d/pigarage_project.conf
 # Copy notify code
 COPY notify_me.py /pigarage/notify_me.py
 COPY settings/defaultnotificationSettings.ini /pigarage/default/defaultnotificationSettings.ini
+COPY settings/pigarage_cron /pigarage/default/pigarage_cron
 
 # Add setup script
 COPY entrySetup.sh /pigarage/entrySetup.sh

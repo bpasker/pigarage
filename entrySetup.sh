@@ -98,5 +98,10 @@ cp /pigarage/default/defaultnotificationSettings.ini /settings/notificationSetti
 sed -i "s/user@gmail.com/$emailSender/g" /settings/notificationSettings.ini
 sed -i "s/000000000@vtext.com/$textTo/g" /settings/notificationSettings.ini
 
+# Setup cron to send text if enabled
+if $enableNotifications; then
+    cp /pigarage/default/pigarage_cron /etc/cron.d/pigarage_cron
+fi
+
 # Run bash so docker doesn't stop
 bash

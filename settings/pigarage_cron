@@ -1,0 +1,6 @@
+
+SHELL=/bin/sh
+PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
+
+
+0,15,30,45 21-22 * * * cd /pigarage && python3 notify_me.py > /dev/null
