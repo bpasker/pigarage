@@ -81,20 +81,6 @@ fi
 # Start Supervisor to enable pigarage
 service supervisor start
 
-#
-/pigarage/default/notificationSettings.ini
-
-# defaultnotificationSettings file
-defaultnotificationSettings=/settings/notificationSettings.ini
-
-# Check if defaultnotificationSettings file is present
-if [ -f "$defaultnotificationSettings" ]; then
-    echo "$defaultnotificationSettings exists."
-else
-    echo "Adding $defaultnotificationSettings"
-    cp /pigarage/default/defaultnotificationSettings.ini /settings/notificationSettings.ini
-fi
-
 # pickel file
 pickle=/pigarage/token.pickle
 
@@ -106,6 +92,8 @@ else
     cp /settings/token.pickle /pigarage/token.pickle
 fi
 
+# Replace config file
+cp /pigarage/default/defaultnotificationSettings.ini /settings/notificationSettings.ini
 # Replace email sender
 sed -i "s/user@gmail.com/$emailSender/g" /settings/notificationSettings.ini
 sed -i "s/000000000@vtext.com/$textTo/g" /settings/notificationSettings.ini
